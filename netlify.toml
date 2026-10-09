@@ -1,0 +1,16 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/momo/charge"
+  to = "/.netlify/functions/momo-charge"
+  status = 200
+[[redirects]]
+  from = "/api/momo/otp"
+  to = "/.netlify/functions/momo-otp"
+  status = 200
+[[redirects]]
+  from = "/api/momo/status"
+  to = "/.netlify/functions/momo-status"
+  status = 200
