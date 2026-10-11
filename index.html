@@ -68,6 +68,15 @@ footer{padding:30px 6vw;text-align:center;font-size:14px;color:#b3a380}
 .pn input,.pn select,.pn textarea{background:var(--card);border:1px solid var(--ln);color:var(--fg);padding:12px;font:inherit;width:100%}
 .sp{width:46px;height:46px;border:4px solid var(--ln);border-top-color:var(--gold);border-radius:50%;animation:sp 1s linear infinite;margin:10px auto}@keyframes sp{to{transform:rotate(360deg)}}
 .dmo{background:#d4a017;color:#1d1508;padding:8px 12px;font-size:14px;margin:0}
+.ok{width:76px;height:76px;margin:6px auto 0}.ok svg{width:100%;height:100%;fill:none;stroke:#2e9e5b;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.ok circle{stroke-dasharray:151;stroke-dashoffset:151;animation:dw .7s ease forwards}.ok path{stroke-dasharray:50;stroke-dashoffset:50;animation:dw .5s .6s ease forwards}@keyframes dw{to{stroke-dashoffset:0}}
+.okh{text-align:center;font-size:30px}.oks{text-align:center;color:var(--mut);margin:0}
+.rc{border:1px solid var(--ln);background:var(--card);padding:18px;border-top:4px solid var(--gold)}
+.rh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px dashed var(--ln);padding-bottom:10px;margin-bottom:12px}.rh b{font:700 20px Fraunces,serif;color:var(--gold)}.rh span{color:var(--mut);font-size:14px}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.rg small{display:block;color:var(--mut);font-size:12px}.rg b{font-weight:500;font-size:15px;overflow-wrap:anywhere}.rg b.pd{color:#2e9e5b}
+.rr{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:15px}.rr small{display:block;color:var(--mut)}.rs{border-top:1px dashed var(--ln);border-bottom:1px dashed var(--ln);margin:4px 0;padding:6px 0}.rr.tt{font-weight:500;font-size:18px;border-top:1px solid var(--fg);margin-top:6px;padding-top:10px}
+.rw{margin-top:12px;font-size:14px;color:var(--mut)}.rw b{display:block;color:var(--fg);font-weight:500}
+.rn{font-size:14px;color:var(--mut);margin:0}.ra{display:flex;gap:10px;flex-wrap:wrap}.ra .btn{flex:1 1 auto;text-align:center}
+@media print{body>*:not(#co){display:none!important}#co{position:static;background:none;display:block!important}#co .pn{width:100%;height:auto;overflow:visible;padding:0}.ra{display:none}}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 #lb{padding:24px 14px 56px;margin:0 -14px}
 .lk{box-shadow:0 18px 38px rgba(0,0,0,.38),0 4px 10px rgba(0,0,0,.25);border-radius:6px;transform-style:preserve-3d;will-change:transform}
@@ -105,7 +114,7 @@ footer{padding:30px 6vw;text-align:center;font-size:14px;color:#b3a380}
 <input id="mn" type="tel" placeholder="MoMo number, e.g. 024 000 0000" aria-label="MoMo number" autocomplete="tel">
 <div id="sm"></div><p id="er" style="color:#c0392b;margin:0"></p><button class="btn" id="pay">Pay</button></div>
 <div id="s2"><h3>Approve on your phone</h3><div class="sp"></div><p id="wm"></p></div>
-<div id="s3"><h3>Order placed</h3><p>Thank you! Your order reference is <b id="orf"></b>.</p><p id="os"></p><button class="btn" id="dn">Back to the shop</button></div>
+<div id="s3"></div>
 </div></div>
 <div id="toast"></div><canvas id="fx"></canvas><div id="ring"></div>
 
@@ -183,7 +192,18 @@ const go=n=>['s1','s2','s3'].forEach((id,k)=>$('#'+id).style.display=k==n-1?'fle
 function sum(){$('#ad').style.display=$('#dm').value=='d'?'':'none';$('#sm').innerHTML=`<div class="ln"><span>Subtotal</span><span>GH₵ ${sub()}</span></div><div class="ln"><span>Delivery</span><span>GH₵ ${fee()}</span></div><div class="ln"><b>Total</b><b>GH₵ ${tot()}</b></div>`;$('#pay').textContent='Pay GH₵ '+tot()+' with MoMo'}
 $('#dm').onchange=sum;
 $('#ck').onclick=()=>{$('#cd').classList.remove('on');$('#co').classList.add('on');$('#dmb').textContent=CFG.mode=='demo'?'Demo mode: no real money is charged.':'';$('#dmb').style.display=CFG.mode=='demo'?'':'none';$('#er').textContent='';go(1);sum()};
-$('#cc').onclick=$('#dn').onclick=()=>$('#co').classList.remove('on');
+$('#cc').onclick=()=>$('#co').classList.remove('on');$('#s3').onclick=e=>{const a=e.target.closest('[data-r]');if(!a)return;if(a.dataset.r=='print')window.print();else $('#co').classList.remove('on')};
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function receipt(o){const sub=o.items.reduce((a,x)=>a+x.p*x.q,0),fee=o.total-sub,when=new Date().toLocaleString('en-GB',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}),m=o.momo.replace(/^(\d{3})\d{4}(\d{3})$/,'$1 **** $2');
+const rows=o.items.map(x=>`<div class="rr"><span>${x.q} × ${esc(x.n)}<small>Size ${esc(x.s)}</small></span><span>GH₵ ${(x.p*x.q).toFixed(2)}</span></div>`).join('');
+const where=o.delivery=='d'?'<b>Delivery to</b>'+esc(o.address):'<b>Pick up at</b>Forestry Research Institute of Ghana (FORIG)';
+$('#s3').innerHTML=`<div class="ok"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l8 8 15-17"/></svg></div><h3 class="okh">Payment successful</h3><p class="oks">Thank you, ${esc(o.name)}. Your order has been received.</p>
+<div class="rc"><div class="rh"><b>Bee Golden Collections</b><span>Payment receipt</span></div>
+<div class="rg"><div><small>Order number</small><b>${o.ref}</b></div><div><small>Date</small><b>${when}</b></div><div><small>Paid with</small><b>${esc(o.network)} · ${m}</b></div><div><small>Status</small><b class="pd">PAID</b></div></div>
+<div class="rs">${rows}</div><div class="rr"><span>Subtotal</span><span>GH₵ ${sub.toFixed(2)}</span></div><div class="rr"><span>Delivery</span><span>${fee?'GH₵ '+fee.toFixed(2):'Free (pickup)'}</span></div><div class="rr tt"><span>Total paid</span><span>GH₵ ${o.total.toFixed(2)}</span></div><div class="rw">${where}</div></div>
+<p class="rn">${CFG.mode=='live'?'Paystack has sent a payment receipt to '+esc(o.email)+'.':'Demo mode: no real payment was made.'}</p>
+<p class="rn"><b>What happens next</b><br>We will contact you on the number you paid with to confirm your order and ${o.delivery=='d'?'arrange delivery':'let you know when it is ready'}. Questions? Call or WhatsApp +233 50 882 9176.</p>
+<div class="ra"><button class="btn" data-r="close">Continue shopping</button><button class="btn o" data-r="print">Print receipt</button><a class="btn o" target="_blank" rel="noopener" href="https://wa.me/233508829176?text=${encodeURIComponent('Hello Bee Golden Collections, my order number is '+o.ref)}">WhatsApp us</a></div>`}
 async function payMoMo(o){if(CFG.mode!='live'){await new Promise(r=>setTimeout(r,4000));return{ok:true}}
 const post=(u,b)=>fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(r=>r.json()),wait=ms=>new Promise(r=>setTimeout(r,ms));
 try{let r=await post('/api/momo/charge',o);if(!r.ok)return{ok:false,msg:r.message};o.ref=r.ref;
@@ -196,7 +216,7 @@ $('#er').textContent='';const o={ref:'BG-'+Math.random().toString(36).slice(2,8)
 $('#wm').textContent='A '+o.network+' prompt for GH₵ '+o.total+' was sent to '+ph+'. Enter your PIN to approve.';go(2);
 const r=await payMoMo(o);
 if(r.ok){try{const l=JSON.parse(localStorage.getItem('bgorders')||'[]');l.push(o);localStorage.setItem('bgorders',JSON.stringify(l))}catch(e){}
-cart=[];save();$('#orf').textContent=o.ref;$('#os').textContent=o.items.map(x=>x.q+'× '+x.n+' ('+x.s+')').join(', ')+'. Total GH₵ '+o.total+'.';go(3)}
+cart=[];save();receipt(o);go(3)}
 else{go(1);$('#er').textContent=r.msg||'The payment was not approved. Check your MoMo balance and try again.'}};
 save();
 /* lookbook */
