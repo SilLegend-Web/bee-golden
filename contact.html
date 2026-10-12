@@ -55,15 +55,20 @@ footer{padding:30px 6vw;text-align:center;font-size:14px;color:#b3a380;backgroun
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <footer>Bee Golden Collections</footer><div id="toast"></div>
-<script>
+<script>(async()=>{
 const $=s=>document.querySelector(s);
+const SITE=await(async()=>{for(const u of ['/api/site-data','/data/default.json']){try{const r=await fetch(u,{cache:'no-store'});if(r.ok){const d=await r.json();if(d&&Array.isArray(d.products)&&d.products.length)return d}}catch(e){}}return null})();
+const SET=(SITE&&SITE.settings)||{},PRODS=SITE?SITE.products.filter(p=>p.vis!==false):[];
+if(!PRODS.length){document.body.insertAdjacentHTML('afterbegin','<p style="padding:120px 24px;text-align:center;color:#b3a380">The shop is being updated. Please check back soon.</p>');return}
+const BY=Object.fromEntries(PRODS.map(p=>[p.id,p]));
+
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e.t);e.t=setTimeout(()=>e.classList.remove('on'),2600)}
 $('#ttl').innerHTML=[...'Contact us'].map((c,k)=>`<span style="--k:${k}">${c==' '?'&nbsp;':c}</span>`).join('');
 try{const c=JSON.parse(localStorage.getItem('bgcart')||'[]');$('#bag').textContent='Bag '+c.reduce((a,x)=>a+x.q,0)}catch(e){}
 document.querySelectorAll('.t3').forEach(c=>{c.onpointermove=e=>{if(matchMedia('(hover:none),(prefers-reduced-motion:reduce)').matches)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty('--ry',x*14+'deg');c.style.setProperty('--rx',-y*14+'deg')};c.onpointerleave=()=>{c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')}});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});document.querySelectorAll('.rv').forEach(e=>io.observe(e));
 /* EDIT YOUR DETAILS HERE */
-const CFG={phone:'+233 50 882 9176',wa:'233508829176',email:'lilbright247@gmail.com',address:'Forestry Research Institute of Ghana (FORIG)',hours:'8:00 am to 7:00 pm',lat:6.712463,lng:-1.525517,mapsUrl:'https://maps.app.goo.gl/1WtrxAeS9atSK5jj8',geo:['Forestry Research Institute of Ghana, Fumesua, Kumasi, Ghana','Fumesua, Kumasi, Ghana']};
+const CFG={phone:SET.phone||'',wa:SET.wa||'',email:SET.email||'',address:SET.address||'',hours:SET.hours||'',lat:SET.lat??null,lng:SET.lng??null,mapsUrl:SET.mapsUrl||'',geo:[SET.address||'']};
 const cards=[['Call us',CFG.phone,CFG.phone.replace(/\D/g,'').length>8?'tel:'+CFG.phone.replace(/[^+\d]/g,''):'','Call now'],['WhatsApp',CFG.wa?'+'+CFG.wa.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/,'$1 $2 $3 $4'):'Add your WhatsApp number',CFG.wa?'https://wa.me/'+CFG.wa:'','Chat now'],['Email',CFG.email,'mailto:'+CFG.email,'Write to us'],['Visit us',CFG.address,'','']];
 $('#ic').innerHTML=cards.map(c=>`<div class="t3 rv"><div><small>${c[0]}</small><b>${c[1]}</b>${c[2]?`<a href="${c[2]}" target="_blank" rel="noopener">${c[3]}</a>`:''}</div></div>`).join('')+`<div class="t3 rv"><div><small>Opening hours</small><b>${CFG.hours}</b></div></div>`;
 document.querySelectorAll('.t3').forEach(c=>{c.onpointermove=e=>{if(matchMedia('(hover:none),(prefers-reduced-motion:reduce)').matches)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty('--ry',x*14+'deg');c.style.setProperty('--rx',-y*14+'deg')};c.onpointerleave=()=>{c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')}});
@@ -121,4 +126,4 @@ map.on('load',()=>{rm.classList.add('on');if(window.__stopIll)window.__stopIll()
 setTimeout(()=>{if(!rm.classList.contains('on')){try{map.remove()}catch(e){}}},20000);
 })();
 
-</script></body></html>
+})();</script></body></html>

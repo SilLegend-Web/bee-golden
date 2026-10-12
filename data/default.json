@@ -1,0 +1,184 @@
+{
+ "products": [
+  {
+   "id": "p1",
+   "name": "White gold-embroidered dashiki",
+   "cat": "African wear",
+   "price": 480,
+   "desc": "Long-sleeve white dashiki with gold embroidery at the neck, chest and cuffs.",
+   "tag": "Signature",
+   "img": "/media/p1.webp",
+   "cut": "/media/c1.webp",
+   "sheet": "/media/s1.webp",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": false,
+   "vis": true,
+   "sold": false
+  },
+  {
+   "id": "p2",
+   "name": "Navy embroidered agbada set",
+   "cat": "African wear",
+   "price": 650,
+   "desc": "Navy flowing top with an embroidered chest panel, with matching trousers.",
+   "tag": "Signature",
+   "img": "/media/p2.webp",
+   "cut": "/media/c2.webp",
+   "sheet": "/media/s2.webp",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": true,
+   "vis": true,
+   "sold": false
+  },
+  {
+   "id": "p3",
+   "name": "White gold-button jacket",
+   "cat": "African wear",
+   "price": 520,
+   "desc": "Mandarin-collar jacket with a side row of gold buttons.",
+   "tag": "Signature",
+   "img": "/media/p3.webp",
+   "cut": "/media/c3.webp",
+   "sheet": "/media/s3.webp",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": false,
+   "vis": true,
+   "sold": false
+  },
+  {
+   "id": "p4",
+   "name": "Black gold dashiki",
+   "cat": "African wear",
+   "price": 480,
+   "desc": "Long black dashiki with rich gold embroidery and gold cuff detail.",
+   "tag": "Signature",
+   "img": "/media/p4.webp",
+   "cut": "/media/c4.webp",
+   "sheet": "/media/s4.webp",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": false,
+   "vis": true,
+   "sold": false
+  },
+  {
+   "id": "p5",
+   "name": "Red ribbed shirt",
+   "cat": "Ready-made",
+   "price": 150,
+   "desc": "Soft ribbed short-sleeve shirt in red, with a chest pocket.",
+   "tag": "Everyday",
+   "img": "/media/p5.webp",
+   "cut": "",
+   "sheet": "",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": false,
+   "vis": true,
+   "sold": false
+  },
+  {
+   "id": "p6",
+   "name": "Grey graphic tee",
+   "cat": "Ready-made",
+   "price": 110,
+   "desc": "Relaxed charcoal tee with a rope graphic and the word life.",
+   "tag": "Everyday",
+   "img": "/media/p6.webp",
+   "cut": "",
+   "sheet": "",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": false,
+   "vis": true,
+   "sold": false
+  },
+  {
+   "id": "p7",
+   "name": "Ink-wash print shirt",
+   "cat": "Ready-made",
+   "price": 160,
+   "desc": "White short-sleeve shirt with a bamboo ink-wash print.",
+   "tag": "Everyday",
+   "img": "/media/p7.webp",
+   "cut": "",
+   "sheet": "",
+   "sheetMeta": {
+    "c": 8,
+    "r": 5,
+    "n": 40
+   },
+   "full": false,
+   "vis": true,
+   "sold": false
+  }
+ ],
+ "hero": [
+  "p1",
+  "p2",
+  "p3",
+  "p4"
+ ],
+ "runway": [
+  "p1",
+  "p2",
+  "p3",
+  "p4"
+ ],
+ "lookbook": [
+  {
+   "id": "p1",
+   "title": "Sunday best"
+  },
+  {
+   "id": "p3",
+   "title": "Naming ceremony"
+  },
+  {
+   "id": "p4",
+   "title": "Evening gold"
+  },
+  {
+   "id": "p2",
+   "title": "Agbada style"
+  }
+ ],
+ "settings": {
+  "fee": 25,
+  "phone": "+233 50 882 9176",
+  "wa": "233508829176",
+  "email": "lilbright247@gmail.com",
+  "address": "Forestry Research Institute of Ghana (FORIG)",
+  "hours": "8:00 am to 7:00 pm",
+  "lat": 6.712463,
+  "lng": -1.525517,
+  "mapsUrl": "https://maps.app.goo.gl/1WtrxAeS9atSK5jj8",
+  "banner": [
+   "Pay with MoMo",
+   "Tailored African wear",
+   "Quality ready-made shirts",
+   "Delivery or free pickup"
+  ]
+ }
+}

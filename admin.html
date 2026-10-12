@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · Bee Golden Collections</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700&family=Outfit:wght@300;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120c06;--card:#1c1409;--ln:#33260f;--fg:#f5ecd7;--mut:#b3a380;--gold:#d4a017;--red:#e0605a;--grn:#4caf78;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*:before,*:after{box-sizing:inherit}body{margin:0;background:var(--bg);color:var(--fg);font:300 16px/1.5 Outfit,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:400;margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.btn{background:var(--gold);color:#1d1508;border:0;padding:10px 20px;border-radius:24px;font-weight:500}.btn.o{background:none;border:1px solid var(--gold);color:var(--gold)}.btn:disabled{opacity:.4;cursor:not-allowed}
+input,select,textarea{background:#120c06;border:1px solid var(--ln);color:var(--fg);padding:10px 12px;width:100%;border-radius:4px}input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+label{display:block;font-size:14px;color:var(--mut);margin:12px 0 4px}label.ck{display:flex;gap:8px;align-items:center;color:var(--fg);margin:10px 0}label.ck input{width:auto}
+#login{max-width:380px;margin:12vh auto;padding:28px;background:var(--card);border-bottom:3px solid var(--gold)}#login h1{margin-bottom:6px}#login .btn{width:100%;margin-top:16px}.err{color:var(--red);min-height:22px;margin:8px 0 0;font-size:14px}
+header{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:rgba(18,12,6,.96);border-bottom:1px solid var(--ln)}header b{font:700 20px Fraunces,serif;color:var(--gold);margin-right:auto}
+#st{font-size:14px;color:var(--mut)}#st.dirty{color:#ffb84d}.demo{background:#3a2a10;color:#ffd27a;padding:8px 16px;font-size:14px}
+#tabs{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;border-bottom:1px solid var(--ln)}#tabs button{background:none;border:1px solid var(--ln);color:var(--fg);padding:8px 18px;border-radius:20px;white-space:nowrap}#tabs button.on{background:var(--gold);color:#1d1508;border-color:var(--gold)}
+main{max-width:980px;margin:0 auto;padding:20px 16px 80px}.hint{color:var(--mut);font-size:14px;margin:4px 0 12px}
+.pc{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--ln);padding:10px;margin-bottom:10px}.pc img{width:64px;height:84px;object-fit:cover;background:#2a1f10}
+.pi{flex:1 1 200px;min-width:0}.pi b{display:block;overflow-wrap:anywhere}.pi span{color:var(--mut);font-size:14px}.pa{display:flex;gap:6px;flex-wrap:wrap}.pa button{background:none;border:1px solid var(--ln);color:var(--fg);padding:6px 12px;border-radius:14px;font-size:14px}.pa button:hover{border-color:var(--gold)}.pa .dg{color:var(--red)}
+i.b{font-style:normal;font-size:12px;border:1px solid var(--ln);border-radius:10px;padding:1px 8px;margin-right:4px;color:var(--mut)}i.b.g{color:var(--grn);border-color:var(--grn)}i.b.w{color:#ffb84d;border-color:#ffb84d}
+.box{background:var(--card);border:1px solid var(--ln);padding:16px;margin-bottom:18px}.box h3{margin-bottom:2px}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 16px}
+.sl .pc{padding:8px}.sl .pc img{width:44px;height:58px}.sl input{margin-top:6px}.ad{display:flex;gap:8px;margin-top:10px}.ad select{flex:1}
+.modal{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.7);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:16px}.modal[hidden]{display:none}
+.mb{background:var(--card);width:100%;max-width:640px;padding:22px;border-bottom:3px solid var(--gold);margin:auto}.mb h2{margin-bottom:6px}.mb .acts{display:flex;gap:10px;margin-top:18px;justify-content:flex-end}
+.pv{display:flex;gap:12px;align-items:center}.pv img{width:72px;height:96px;object-fit:cover;background:#2a1f10}.pv input[type=file]{padding:6px}
+details{margin-top:14px;border:1px solid var(--ln);padding:8px 12px}summary{cursor:pointer;color:var(--gold)}
+.help h3{margin:16px 0 4px}.help p,.help li{color:var(--mut)}.help b{color:var(--fg)}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,90px);background:var(--gold);color:#1d1508;padding:10px 22px;border-radius:24px;z-index:60;transition:transform .4s;max-width:90vw;text-align:center}#toast.on{transform:translate(-50%,0)}#toast.bad{background:var(--red);color:#fff}
+</style></head><body>
+<div id="login" hidden><h1>Admin</h1><p class="hint">Bee Golden Collections. Enter your admin password.</p><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><p class="err" id="lerr"></p><button class="btn" id="lgo">Log in</button></div>
+<div id="app" hidden>
+<div class="demo" id="demo" hidden>Demo mode: you can try everything, but changes stay in this browser only and do not change the live website.</div>
+<header><b>Bee Golden · Admin</b><span id="st">No changes</span><button class="btn" id="save" disabled>Save changes</button><button class="btn o" id="out">Log out</button></header>
+<div id="tabs"><button class="on" data-t="prod">Products</button><button data-t="show">Showcase</button><button data-t="set">Store settings</button><button data-t="help">Help</button></div>
+<main>
+<section id="t-prod"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><h2>Products</h2><p class="hint">Everything sold in the shop. The order here is the order in the shop.</p></div><button class="btn" id="add">+ Add product</button></div><div id="plist"></div></section>
+<section id="t-show" hidden><h2>Showcase</h2><p class="hint">Choose which products appear in the hero, on the runway and in the Lookbook of the home page.</p><div id="sh"></div></section>
+<section id="t-set" hidden><h2>Store settings</h2><p class="hint">Contact details, delivery fee and the shop banner. They update on the Contact page, the receipt and the Shop page.</p><div id="sset"></div></section>
+<section id="t-help" hidden class="help"><h2>Help</h2>
+<h3>How saving works</h3><p>Your changes are <b>not live</b> until you press <b>Save changes</b>. After saving, refresh the website to see them.</p>
+<h3>Adding a product</h3><p>Press <b>+ Add product</b>, fill in the name, category and price, choose a photo and press Done, then <b>Save changes</b>. A plain background looks best.</p>
+<h3>Hero section</h3><p>The hero shows pieces with no background. For each hero piece, upload a <b>transparent image</b> (PNG or WebP with the background removed) in the product's editor. Free tools such as remove.bg can do this. Without one, the hero shows the normal photo with its background.</p>
+<h3>Runway</h3><p>Runway pieces turn 360° only if they have a <b>360° turntable image</b>. Pieces without one still appear in a gold frame, as a normal photo. Turntable images are built from a short video that goes once around the piece. Send the video to Claude, who will prepare the turntable image for you to upload under <b>Advanced</b> in the product editor.</p>
+<h3>Prices and payments</h3><p>The payment system reads the prices you save here, so what customers pay always matches the shop. If you mark a product <b>Sold out</b> or <b>Hide</b> it, it cannot be bought.</p>
+<h3>Lost or stolen password</h3><p>In Netlify, open Site configuration, then Environment variables, change <b>ADMIN_PASSWORD</b> and deploy again. Everyone who is logged in is logged out.</p></section>
+</main></div>
+<div class="modal" id="ed" hidden><div class="mb" id="edb"></div></div>
+<div id="toast"></div>
+<script>
+
+(()=>{
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let D=null,API=false,tok='',dirty=false,E=null,EI=-1;
+try{tok=sessionStorage.getItem('bgtok')||''}catch(e){}
+const LIM={hero:4,run:5,look:4},KEY={hero:'hero',run:'runway',look:'lookbook'};
+function toast(t,bad){const e=$('#toast');e.textContent=t;e.className='on'+(bad?' bad':'');clearTimeout(e.t);e.t=setTimeout(()=>e.className='',3200)}
+function mark(on=true){dirty=on;$('#save').disabled=!on;$('#st').textContent=on?'Unsaved changes':'All changes saved';$('#st').className=on?'dirty':''}
+addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+async function jfetch(u,o){try{return await fetch(u,o)}catch(e){return null}}
+async function detect(){const r=await jfetch('/api/site-data',{cache:'no-store'});API=!!(r&&(r.headers.get('content-type')||'').includes('json'));return r}
+async function loadData(){
+ if(API){const r=await jfetch('/api/site-data',{cache:'no-store'});if(r&&r.ok){const d=await r.json();if(d.products&&d.products.length)return d}}
+ if(!API){try{const l=JSON.parse(localStorage.getItem('bgdemo')||'null');if(l&&l.products)return l}catch(e){}if(window.__DEF)return JSON.parse(JSON.stringify(window.__DEF))}
+ const r=await jfetch('/data/default.json');if(r&&r.ok)return await r.json();return window.__DEF?JSON.parse(JSON.stringify(window.__DEF)):null}
+function norm(d){d.products=d.products||[];d.hero=d.hero||[];d.runway=d.runway||[];d.lookbook=d.lookbook||[];d.settings=Object.assign({fee:25,phone:'',wa:'',email:'',address:'',hours:'',lat:null,lng:null,mapsUrl:'',banner:[]},d.settings||{});return d}
+async function start(){
+ await detect();
+ if(!API){$('#demo').hidden=false;D=norm(await loadData());show();return}
+ if(!tok){$('#login').hidden=false;$('#pw').focus();return}
+ D=norm(await loadData()||{});show()}
+function show(){$('#login').hidden=true;$('#app').hidden=false;mark(false);$('#st').textContent='No changes';drawAll()}
+$('#lgo').onclick=async()=>{const r=await jfetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#pw').value})});
+ if(!r){$('#lerr').textContent='Cannot reach the server. Check your internet.';return}
+ if(r.status===503){$('#lerr').textContent='Admin is not set up yet. In Netlify, add ADMIN_PASSWORD under Environment variables, then deploy again.';return}
+ if(!r.ok){$('#lerr').textContent='Wrong password.';return}
+ tok=(await r.json()).token;try{sessionStorage.setItem('bgtok',tok)}catch(e){}$('#lerr').textContent='';$('#pw').value='';D=norm(await loadData()||{});show()};
+$('#pw').onkeydown=e=>{if(e.key==='Enter')$('#lgo').click()};
+function logout(){tok='';try{sessionStorage.removeItem('bgtok')}catch(e){}if(API){$('#app').hidden=true;$('#login').hidden=false}else location.reload()}
+$('#out').onclick=()=>{if(dirty&&!confirm('You have unsaved changes. Log out anyway?'))return;dirty=false;logout()};
+$('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#tabs').children].forEach(x=>x.classList.toggle('on',x===b));['prod','show','set','help'].forEach(t=>$('#t-'+t).hidden=t!==b.dataset.t)};
+const byId=id=>D.products.find(p=>p.id===id);
+function drawAll(){drawProducts();drawShow();drawSet()}
+/* ---- products ---- */
+const badges=p=>(p.vis===false?'<i class="b w">Hidden</i>':'')+(p.sold?'<i class="b w">Sold out</i>':'')+(p.cut?'<i class="b g">Transparent image</i>':'')+(p.sheet?'<i class="b g">360° turntable</i>':'');
+function drawProducts(){$('#plist').innerHTML=D.products.map((p,i)=>`<div class="pc"><img src="${esc(p.img)}" alt="" onerror="this.style.visibility='hidden'"><div class="pi"><b>${esc(p.name)}</b><span>${esc(p.cat)} · GH₵ ${esc(p.price)}</span><div>${badges(p)}</div></div><div class="pa"><button data-a="edit" data-i="${i}">Edit</button><button data-a="up" data-i="${i}" aria-label="Move up">↑</button><button data-a="dn" data-i="${i}" aria-label="Move down">↓</button><button data-a="vis" data-i="${i}">${p.vis===false?'Show':'Hide'}</button><button data-a="sold" data-i="${i}">${p.sold?'Back in stock':'Sold out'}</button><button class="dg" data-a="del" data-i="${i}">Delete</button></div></div>`).join('')||'<p class="hint">No products yet.</p>'}
+$('#plist').onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i,p=D.products[i],a=b.dataset.a;
+ if(a==='edit')return openEd(i);
+ if(a==='up'&&i>0)[D.products[i-1],D.products[i]]=[D.products[i],D.products[i-1]];
+ if(a==='dn'&&i<D.products.length-1)[D.products[i+1],D.products[i]]=[D.products[i],D.products[i+1]];
+ if(a==='vis')p.vis=p.vis===false;
+ if(a==='sold')p.sold=!p.sold;
+ if(a==='del'){if(!confirm('Delete "'+p.name+'" from the shop?'))return;D.products.splice(i,1);['hero','runway'].forEach(k=>D[k]=D[k].filter(x=>x!==p.id));D.lookbook=D.lookbook.filter(x=>x.id!==p.id)}
+ mark();drawAll()};
+$('#add').onclick=()=>openEd(-1);
+/* ---- editor ---- */
+function openEd(i){EI=i;E=i<0?{id:'x'+Date.now().toString(36),name:'',cat:(D.products[0]&&D.products[0].cat)||'General',price:'',desc:'',tag:'',img:'',cut:'',sheet:'',sheetMeta:{c:8,r:5,n:40},full:false,vis:true,sold:false}:JSON.parse(JSON.stringify(D.products[i]));E.sheetMeta=E.sheetMeta||{c:8,r:5,n:40};drawEd();$('#ed').hidden=false}
+function drawEd(){const cats=[...new Set(D.products.map(p=>p.cat))];
+ $('#edb').innerHTML=`<h2>${EI<0?'Add product':'Edit product'}</h2>
+<label for="e-name">Name</label><input id="e-name" value="${esc(E.name)}" maxlength="80">
+<div class="row"><div><label for="e-cat">Category</label><input id="e-cat" list="e-cats" value="${esc(E.cat)}" maxlength="30"><datalist id="e-cats">${cats.map(c=>`<option value="${esc(c)}">`).join('')}</datalist></div><div><label for="e-price">Price (GH₵)</label><input id="e-price" type="number" min="1" step="0.01" value="${esc(E.price)}"></div><div><label for="e-tag">Small tag on the card (optional)</label><input id="e-tag" value="${esc(E.tag)}" maxlength="20" placeholder="e.g. New, Signature"></div></div>
+<label for="e-desc">Description</label><textarea id="e-desc" rows="3" maxlength="400">${esc(E.desc)}</textarea>
+<label>Photo (required)</label><div class="pv"><img id="p-img" src="${esc(E.img)}" alt="" onerror="this.style.visibility='hidden'"><div><input type="file" id="f-img" accept="image/*"><p class="hint" id="m-img">A clear photo on a plain background.</p></div></div>
+<label>Transparent image for the hero (optional)</label><div class="pv"><img id="p-cut" src="${esc(E.cut)}" alt="" style="background:repeating-conic-gradient(#3a2d18 0 25%,#241a0d 0 50%) 0 0/16px 16px" onerror="this.style.visibility='hidden'"><div><input type="file" id="f-cut" accept="image/png,image/webp"><p class="hint" id="m-cut">PNG or WebP with the background removed. ${E.cut?'<a href="#" id="x-cut" style="color:var(--gold)">Remove it</a>':''}</p></div></div>
+<details><summary>Advanced: runway 360° turntable</summary><p class="hint">One image holding every frame of a 360° turn, in rows. Claude prepares it from your video. The default layout is 8 across, 5 down, 40 frames.</p>
+<input type="file" id="f-sheet" accept="image/png,image/webp"><p class="hint" id="m-sheet">${E.sheet?'A turntable image is set. <a href="#" id="x-sheet" style="color:var(--gold)">Remove it</a>':'No turntable image.'}</p>
+<div class="row"><div><label for="e-c">Frames across</label><input id="e-c" type="number" min="1" max="12" value="${esc(E.sheetMeta.c)}"></div><div><label for="e-r">Frames down</label><input id="e-r" type="number" min="1" max="12" value="${esc(E.sheetMeta.r)}"></div><div><label for="e-n">Total frames</label><input id="e-n" type="number" min="1" max="144" value="${esc(E.sheetMeta.n)}"></div></div>
+<label class="ck"><input type="checkbox" id="e-full" ${E.full?'checked':''}> Full-length outfit (stands on the floor, with trousers). Leave off for tops.</label></details>
+<label class="ck"><input type="checkbox" id="e-vis" ${E.vis===false?'':'checked'}> Visible in the shop</label><label class="ck"><input type="checkbox" id="e-sold" ${E.sold?'checked':''}> Sold out</label>
+<p class="err" id="e-err"></p><div class="acts"><button class="btn o" id="e-cancel">Cancel</button><button class="btn" id="e-done">Done</button></div>`;
+ const rd=()=>{E.name=$('#e-name').value.trim();E.cat=$('#e-cat').value.trim();E.price=$('#e-price').value;E.tag=$('#e-tag').value.trim();E.desc=$('#e-desc').value.trim();E.sheetMeta={c:+$('#e-c').value||8,r:+$('#e-r').value||5,n:+$('#e-n').value||40};E.full=$('#e-full').checked;E.vis=$('#e-vis').checked;E.sold=$('#e-sold').checked};
+ $('#f-img').onchange=e=>pick(e.target.files[0],'img',rd);$('#f-cut').onchange=e=>pick(e.target.files[0],'cut',rd);$('#f-sheet').onchange=e=>pick(e.target.files[0],'sheet',rd);
+ const xc=$('#x-cut');if(xc)xc.onclick=e=>{e.preventDefault();rd();E.cut='';drawEd()};const xs=$('#x-sheet');if(xs)xs.onclick=e=>{e.preventDefault();rd();E.sheet='';drawEd()};
+ $('#e-cancel').onclick=()=>{$('#ed').hidden=true};
+ $('#e-done').onclick=()=>{rd();const er=$('#e-err');
+  if(!E.name)return er.textContent='Please enter a name.';if(!(+E.price>0))return er.textContent='Please enter a price above 0.';if(!E.img)return er.textContent='Please add a photo.';if(!E.cat)E.cat='General';
+  E.price=Math.round(+E.price*100)/100;if(EI<0)D.products.push(E);else D.products[EI]=E;$('#ed').hidden=true;mark();drawAll()}}
+const readFile=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)});
+async function shrink(f,max,png){const bm=await createImageBitmap(f),sc=Math.min(1,max/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=Math.round(bm.width*sc);c.height=Math.round(bm.height*sc);c.getContext('2d').drawImage(bm,0,0,c.width,c.height);return c.toDataURL(png?'image/png':'image/webp',.85)}
+async function pick(f,kind,rd){if(!f)return;const m=$('#m-'+kind);
+ if(!/^image\//.test(f.type)){m.textContent='Please choose an image file.';return}
+ m.textContent='Uploading…';rd();
+ try{let data=kind==='sheet'?await readFile(f):await shrink(f,kind==='img'?900:900,kind==='cut');
+  if(data.length>4.4e6){m.textContent='That image is too large. Try a smaller one.';return}
+  if(API){const r=await jfetch('/api/admin/upload',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+tok},body:JSON.stringify({data})});
+   if(!r){m.textContent='Upload failed. Check your internet.';return}
+   if(r.status===401){toast('Please log in again.',true);logout();return}
+   if(!r.ok){m.textContent='Upload failed (the image may be too large).';return}
+   data=(await r.json()).url}
+  E[kind]=data;drawEd()}catch(e){m.textContent='Could not read that image. Try a JPG, PNG or WebP.'}}
+/* ---- showcase ---- */
+const SECT=[['hero','Hero section','The big rotating pieces at the top of the home page (up to 4). Best with a transparent image.'],['run','Runway','The pieces shown on the walk-through runway (up to 5). Best with a 360° turntable.'],['look','Lookbook','The look cards under the runway (up to 4). Each gets a title.']];
+const listOf=k=>D[KEY[k]];
+function drawShow(){$('#sh').innerHTML=SECT.map(([k,t,h])=>{const L=listOf(k),free=D.products.filter(p=>p.vis!==false&&!L.some(x=>(x.id||x)===p.id));
+ return `<div class="box"><h3>${t} <span class="hint">(${L.length} of ${LIM[k]})</span></h3><p class="hint">${h}</p><div class="sl">${L.map((x,i)=>{const id=x.id||x,p=byId(id);if(!p)return'';const note=k==='hero'?(p.cut?'<i class="b g">Transparent image</i>':'<i class="b w">Using photo</i>'):k==='run'?(p.sheet?'<i class="b g">360° turntable</i>':'<i class="b w">Photo in frame</i>'):'';
+  return `<div class="pc"><img src="${esc(p.img)}" alt="" onerror="this.style.visibility='hidden'"><div class="pi"><b>${esc(p.name)}</b>${note}${k==='look'?`<input data-k="${k}" data-i="${i}" data-a="title" value="${esc(x.title||'')}" placeholder="Title, e.g. Sunday best" maxlength="30" aria-label="Look title">`:''}</div><div class="pa"><button data-k="${k}" data-i="${i}" data-a="up" aria-label="Move up">↑</button><button data-k="${k}" data-i="${i}" data-a="dn" aria-label="Move down">↓</button><button class="dg" data-k="${k}" data-i="${i}" data-a="rm">Remove</button></div></div>`}).join('')||'<p class="hint">Nothing chosen.</p>'}</div>
+ <div class="ad"><select id="sel-${k}" aria-label="Add to ${t}"><option value="">Choose a product…</option>${free.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select><button class="btn o" data-k="${k}" data-a="add" ${L.length>=LIM[k]?'disabled':''}>Add</button></div></div>`}).join('')}
+$('#sh').onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=b.dataset.k,L=listOf(k),i=+b.dataset.i,a=b.dataset.a;
+ if(a==='add'){const v=$('#sel-'+k).value;if(!v||L.length>=LIM[k])return;L.push(k==='look'?{id:v,title:''}:v)}
+ if(a==='rm')L.splice(i,1);if(a==='up'&&i>0)[L[i-1],L[i]]=[L[i],L[i-1]];if(a==='dn'&&i<L.length-1)[L[i+1],L[i]]=[L[i],L[i+1]];
+ mark();drawShow()};
+$('#sh').oninput=e=>{const t=e.target;if(t.dataset.a==='title'){D.lookbook[+t.dataset.i].title=t.value;mark()}};
+/* ---- settings ---- */
+const FIELDS=[['phone','Phone number','text'],['wa','WhatsApp number (digits only, with country code, e.g. 233508829176)','text'],['email','Email','email'],['address','Shop address','text'],['hours','Opening hours','text'],['fee','Delivery fee (GH₵)','number'],['lat','Map latitude','number'],['lng','Map longitude','number'],['mapsUrl','Google Maps link (optional)','url']];
+function drawSet(){const s=D.settings;$('#sset').innerHTML=`<div class="box"><div class="row">${FIELDS.map(([k,l,t])=>`<div><label for="s-${k}">${l}</label><input id="s-${k}" type="${t}" ${t==='number'?'step="any"':''} value="${esc(s[k]??'')}"></div>`).join('')}</div>
+<label for="s-banner">Banner lines on the Shop page (one per line, up to 6)</label><textarea id="s-banner" rows="5">${esc((s.banner||[]).join('\n'))}</textarea></div>
+<div class="box"><h3>Start again</h3><p class="hint">Restores the original catalogue, showcase and settings. Nothing changes on the website until you press Save changes.</p><button class="btn o" id="reset">Restore original shop</button></div>`}
+$('#sset').oninput=e=>{const t=e.target,s=D.settings;if(t.id==='s-banner')s.banner=t.value.split('\n').map(x=>x.trim()).filter(Boolean).slice(0,6);else if(t.id.startsWith('s-')){const k=t.id.slice(2);s[k]=t.type==='number'?(t.value===''?(k==='fee'?25:null):+t.value):t.value}mark()};
+$('#sset').onclick=async e=>{if(e.target.id!=='reset')return;if(!confirm('Restore the original shop? Your current products and settings will be replaced when you save.'))return;
+ const r=await jfetch('/data/default.json');const d=r&&r.ok?await r.json():(window.__DEF?JSON.parse(JSON.stringify(window.__DEF)):null);if(!d)return toast('Could not load the original shop.',true);D=norm(d);mark();drawAll()};
+/* ---- save ---- */
+$('#save').onclick=async()=>{
+ if(!D.products.length)return toast('Add at least one product first.',true);
+ const bad=D.products.find(p=>!p.name||!(+p.price>0)||!p.img);if(bad)return toast('"'+(bad.name||'A product')+'" needs a name, a price and a photo.',true);
+ if(!D.hero.length)return toast('Choose at least one product for the hero section (Showcase tab).',true);
+ $('#save').disabled=true;$('#st').textContent='Saving…';
+ if(!API){try{localStorage.setItem('bgdemo',JSON.stringify(D));mark(false);toast('Saved in this browser (demo mode).')}catch(e){mark();toast('Could not save here: the browser storage is full.',true)}return}
+ const r=await jfetch('/api/admin/save',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+tok},body:JSON.stringify(D)});
+ if(!r){mark();return toast('Could not reach the server. Your changes are still here, try again.',true)}
+ if(r.status===401){mark();toast('Your login has expired. Please log in again.',true);logout();return}
+ if(!r.ok){mark();return toast('Save failed. Please check the products and try again.',true)}
+ mark(false);toast('Saved. Refresh the website to see your changes.');D=norm(await loadData()||D);drawAll()};
+start();
+})();
+</script></body></html>
